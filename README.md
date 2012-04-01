@@ -6,7 +6,7 @@ Asset files can be batch loaded by extension or explicitly by type.
 
 ## Requirements
 
-- MooTools 1.2+ (1.3+ works as well)
+- MooTools 1.3+ (1.2+ works as well)
 - MooTools More (Assets)
 - MooTools-Asset.css-patch plugin ... https://github.com/matsko/MooTools-Asset.css-patch
 
