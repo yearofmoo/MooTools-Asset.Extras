@@ -62,10 +62,35 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
 });
 ```
 
-### Direct Assets
+### By Asset Type
 
 In the event that your asset URL doesn't include an extension that can be used to figure out the asset file
 
 ```javascript
 Asset.loadAsset('/path/to/some/asset','css',onload,onerror);
+```
+
+### Direct Assets
+
+```javascript
+//js files
+Asset.javascript('/path/to/some/asset',options);
+
+//stylesheets
+Asset.css('/path/to/some/asset',options);
+
+//images (jpg, jpeg, png, gif, tiff, bmp, etc...)
+Asset.image('/path/to/some/asset',options);
+
+//html, htm, php, etc...
+Asset.html('/path/to/some/asset',options);
+
+//xml, rss, atom, svg
+Asset.xml('/path/to/some/asset',options);
+
+//same origin json files
+Asset.json('/path/to/some/asset',options);
+
+//jsonp files
+Asset.jsonp('/path/to/some/asset',options);
 ```
