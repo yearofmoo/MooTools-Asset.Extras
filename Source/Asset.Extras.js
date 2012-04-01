@@ -72,7 +72,7 @@ Asset._javascript = Asset.javascript;
     });
   },
 
-  loadAsset : function(asset,type,onload,onerror) {
+  loadAssetByType : function(asset,type,onload,onerror) {
     onload = onload || function() {};
     onerror = onerror || function() {};
     type = type || '';
@@ -148,7 +148,7 @@ Asset._javascript = Asset.javascript;
 
   loadAssetByName : function(asset,onload,onerror) {
     var type = this.getAssetType(asset);
-    this.loadAsset(asset,type,onload,onerror);
+    this.loadAssetByType(asset,type,onload,onerror);
   },
 
   load : function(assets,options) {

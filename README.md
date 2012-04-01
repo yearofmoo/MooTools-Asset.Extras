@@ -12,7 +12,7 @@ Asset files can be batch loaded by extension or explicitly by type.
 
 ## Browser Support
 
-- Works in all browsers.
+- Works in all browsers
 - Minimal issues with Asset.css (outlined in https://github.com/matsko/MooTools-Asset.css-patch)
 
 ## Usage
@@ -67,7 +67,7 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
 In the event that your asset URL doesn't include an extension that can be used to figure out the asset file
 
 ```javascript
-Asset.loadAsset('/path/to/some/asset','css',onload,onerror);
+Asset.loadAssetByType('/path/to/some/asset','css',onload,onerror);
 
 //or figure it out by name
 
