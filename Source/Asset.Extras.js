@@ -103,6 +103,7 @@ Asset._javascript = Asset.javascript;
       case 'png':
       case 'gif':
       case 'bmp':
+      case 'image':
         method = 'image';
       break;
       case 'xml':

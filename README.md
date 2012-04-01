@@ -43,7 +43,7 @@ Asset.load('./asset.js',{ //this will use the extension to figure out what asset
 ```javascript
 Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figure out what assets to download
 
-  onReady : function(assets,options) {
+  onReady : function(assets,options,total,totalSuccess,totalFailed) {
     //once everything is complete
   },
 
@@ -60,4 +60,12 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
   }
 
 });
+```
+
+### Direct Assets
+
+In the event that your asset URL doesn't include an extension that can be used to figure out the asset file
+
+```javascript
+Asset.loadAsset('/path/to/some/asset','css',onload,onerror);
 ```
