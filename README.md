@@ -73,6 +73,11 @@ Asset.loadAsset('/path/to/some/asset','css',onload,onerror);
 ### Direct Assets
 
 ```javascript
+var options = {
+  onload : function() { ... },
+  onerror : function() { ... }
+}
+
 //js files
 Asset.javascript('/path/to/some/asset',options);
 
