@@ -30,9 +30,11 @@ Asset.load('./asset.js',{ //this will use the extension to figure out what asset
   }
 
 });
+```
 
 ### Multiple Assets
 
+```javascript
 Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figure out what assets to download
 
   onReady : function(assets,options) {
@@ -52,13 +54,14 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
   }
 
 });
+```
 
 ### Serial Assets
 
+```javascript
 Asset.load('./asset.js').then('./asset.css').then(function(assets) {
 
   //all complete!
   
 });
-
 ```
