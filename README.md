@@ -17,17 +17,23 @@ Asset files can be batch loaded by extension or explicitly by type.
 
 ## Usage
 
-Assets can be loaded as a collection, one by one in serial or parallel:
+Assets can be loaded as a collection or one by one.
 
 ### Single Assets
 
 ```javascript
 Asset.load('./asset.js',{ //this will use the extension to figure out what asset to download
 
-  onReady : function(asset,scriptElement) {
+  onLoad : function(asset,options) {
     //asset = "./asset.js";
-    //scriptElement = the generated <script> element
+    //options = {
+    //  data : element, //scriptElement <script>
+    //  type : 'js', //what the asset type was (this one was based off the extension)
+    //  result : true //yes the asset got loaded properly
+    //};
   }
+
+  //onReady or onProgress can also be called
 
 });
 ```
@@ -42,26 +48,16 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
   },
 
   onLoad : function(asset,options) {
-    //once one particular asset has a successful download
+    //once one particular asset has a successful download (same params in the example before)
   },
 
   onError : function(asset,options) {
-    //once one particular asset has a failed download
+    //once one particular asset has a failed to download
   },
 
   onProgress : function(asset,options) {
     //each time an asset has been downloaded (failed or success)
   }
 
-});
-```
-
-### Serial Assets
-
-```javascript
-Asset.load('./asset.js').then('./asset.css').then(function(assets) {
-
-  //all complete!
-  
 });
 ```

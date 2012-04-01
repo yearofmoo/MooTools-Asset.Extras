@@ -19,14 +19,14 @@ window.addEvent('domready',function() {
 
     var assets = ['./asset.css?1','./asset.js?12','./asset2.js?1'];
 
-    Asset.loadAll(assets,{
+    Asset.load(assets,{
 
       onLoad : function(asset,options) {
         alert(asset + ' load');
       },
 
       onError : function(asset,options) {
-        alert(asset + ' onerror');
+        alert(asset + ' error');
       },
 
       onProgress : function(asset,options) {

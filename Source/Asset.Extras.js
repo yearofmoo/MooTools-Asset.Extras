@@ -1,3 +1,7 @@
+(function() {
+
+typeOf = typeOf || $type;
+
 Asset._javascript = Asset.javascript;
 
 (Object.append || $extend).apply(this,[Asset,{
@@ -68,7 +72,7 @@ Asset._javascript = Asset.javascript;
     });
   },
 
-  load : function(asset,type,onload,onerror) {
+  loadAsset : function(asset,type,onload,onerror) {
     onload = onload || function() {};
     onerror = onerror || function() {};
     type = type || '';
@@ -141,12 +145,17 @@ Asset._javascript = Asset.javascript;
     }
   },
 
-  loadByAssetName : function(asset,onload,onerror) {
+  loadAssetByName : function(asset,onload,onerror) {
     var type = this.getAssetType(asset);
-    Asset.load(asset,type,onload,onerror);
+    this.loadAsset(asset,type,onload,onerror);
   },
 
-  loadAll : function(assets,options) {
+  load : function(assets,options) {
+
+    if(typeOf(assets) == 'string') {
+      assets = [assets];
+    }
+
     if((typeOf || $type)(options) == 'function') {
       options = {
         onReady : options
@@ -189,7 +198,7 @@ Asset._javascript = Asset.javascript;
     };
 
     assets.each(function(asset) {
-      this.loadByAssetName(asset,
+      this.loadAssetByName(asset,
         function(asset,data,type) {
           onAssetLoaded(asset,data,type,true);
         },
@@ -198,6 +207,10 @@ Asset._javascript = Asset.javascript;
         }
       );
     },this);
+
+    return this;
   }
 
 }]);
+
+})();
