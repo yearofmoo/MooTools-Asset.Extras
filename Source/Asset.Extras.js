@@ -153,25 +153,34 @@ Asset._javascript = Asset.javascript;
 
   load : function(assets,options) {
 
-    if(typeOf(assets) == 'string') {
-      assets = [assets];
-    }
-
     if((typeOf || $type)(options) == 'function') {
       options = {
         onReady : options
       }
+    }
+    else {
+      options = options || {};
     }
 
     var onError     = options.onError     || function() { };
     var onProgress  = options.onProgress  || function() { };
     var onLoad      = options.onLoad      || function() { };
     var onReady     = options.onReady     || function() { };
+    var className   = options.className   || null;
 
     var total = assets.length;
     var counter = 0;
     var totalFailed = 0;
     var results = {};
+
+    if(!assets || assets.length == 0) {
+      onReady(results,0,0,0);
+      return;
+    }
+
+    if(typeOf(assets) == 'string') {
+      assets = [assets];
+    }
 
     var onAssetLoaded = function(asset,data,type,result) {
       var options = {
