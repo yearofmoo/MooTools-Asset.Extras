@@ -68,6 +68,10 @@ In the event that your asset URL doesn't include an extension that can be used t
 
 ```javascript
 Asset.loadAsset('/path/to/some/asset','css',onload,onerror);
+
+//or figure it out by name
+
+Asset.loadAssetByName('/path/to/some/asset.css',onload,onerror);
 ```
 
 ### Direct Assets
