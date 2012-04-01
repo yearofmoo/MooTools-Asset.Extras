@@ -139,7 +139,8 @@ Asset._javascript = Asset.javascript;
   },
 
   getAssetType : function(asset) {
-    var matches = asset.match(/\.([-\w]+)(?:\?|\#|\Z)/);
+    var matches = asset.match(/\.([-\w+]+)[^\.\s]*$/);
+    alert(matches);
     var ext = matches && matches.length > 1 ? matches[1] : null;
     if(ext) {
       return ext.toLowerCase();
