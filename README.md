@@ -1,6 +1,6 @@
 # MooTools - Asset.Extras
 
-Asset.Extras provides additional methods for pulling asset files in bulk for **html, json, jsonp, xml, css, js and image files** all together.
+Asset.Extras provides additional methods for pulling asset files in bulk for **HTML, JSON, JSONP, XML, CSS, JS and image files** all together.
 
 Asset files can be batch loaded by extension or explicitly by type.
 
