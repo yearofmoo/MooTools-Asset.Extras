@@ -29,7 +29,7 @@ Asset._javascript = Asset.javascript;
     };
     options.onload._onload = onload;
     options.onload._id = id;
-    var script = this._javascript(asset,options);
+    var script = Asset._javascript(asset,options);
     script.id = id;
     script.addEvent('error',options.onerror);
   },
