@@ -21,6 +21,8 @@ Asset._javascript = Asset.javascript;
   javascript : function(asset,options) {
     var id = (new Date().getTime())+'-asset-js';
     var onload = options.onload;
+    var onerror = options.onerror;
+    delete options.onerror;
     options.onload = function() {
       var elm = document.id(arguments.callee._id);
       arguments.callee._onload.call(elm);
@@ -31,7 +33,7 @@ Asset._javascript = Asset.javascript;
     options.onload._id = id;
     var script = Asset._javascript(asset,options);
     script.id = id;
-    script.addEvent('error',options.onerror);
+    script.addEvent('error',onerror);
   },
 
   json : function(path,options) {
@@ -72,9 +74,10 @@ Asset._javascript = Asset.javascript;
     });
   },
 
-  loadAssetByType : function(asset,type,onload,onerror) {
-    onload = onload || function() {};
-    onerror = onerror || function() {};
+  loadAssetByType : function(asset,type,options) {
+    options = options || {};
+    onload = options.onload || function() {};
+    onerror = options.onerror || function() {};
     type = type || '';
     asset = asset || '';
 
@@ -131,11 +134,11 @@ Asset._javascript = Asset.javascript;
     E.asset = asset;
     E.type = type;
 
-    Asset[method](asset,{
+    var args = Object.append(options,{
       onload : L,
       onerror : E
     });
-
+    Asset[method](asset,args);
   },
 
   getAssetType : function(asset) {
@@ -146,9 +149,16 @@ Asset._javascript = Asset.javascript;
     }
   },
 
-  loadAssetByName : function(asset,onload,onerror) {
+  loadAssetByName : function(asset,options) {
     var type = this.getAssetType(asset);
-    this.loadAssetByType(asset,type,onload,onerror);
+    this.loadAssetByType(asset,type,options);
+  },
+
+  unload : function(selector) {
+    $$(selector).filter(function(asset) {
+      var tag = asset.get('tag').toLowerCase();
+      return asset == 'link' || asset == 'script'; 
+    }).destroy();
   },
 
   load : function(assets,options) {
@@ -166,7 +176,7 @@ Asset._javascript = Asset.javascript;
     var onProgress  = options.onProgress  || function() { };
     var onLoad      = options.onLoad      || function() { };
     var onReady     = options.onReady     || function() { };
-    var className   = options.className   || null;
+    var className   = options['class']    || null;
 
     var total = assets.length;
     var counter = 0;
@@ -208,14 +218,15 @@ Asset._javascript = Asset.javascript;
     };
 
     assets.each(function(asset) {
-      this.loadAssetByName(asset,
-        function(asset,data,type) {
+      this.loadAssetByName(asset,{
+        'class' : className,
+        onload : function(asset,data,type) {
           onAssetLoaded(asset,data,type,true);
         },
-        function(asset,type) {
+        onerror : function(asset,type) {
           onAssetLoaded(asset,null,type,false);
         }
-      );
+      });
     },this);
 
     return this;

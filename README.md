@@ -24,6 +24,8 @@ Assets can be loaded as a collection or one by one.
 ```javascript
 Asset.load('./asset.js',{ //this will use the extension to figure out what asset to download
 
+  'class' : '...',
+
   onLoad : function(asset,options) {
     //asset = "./asset.js";
     //options = {
@@ -42,6 +44,8 @@ Asset.load('./asset.js',{ //this will use the extension to figure out what asset
 
 ```javascript
 Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figure out what assets to download
+
+  'class' : '...',
 
   onReady : function(assets,options,total,totalSuccess,totalFailed) {
     //once everything is complete
@@ -67,17 +71,26 @@ Asset.load(['./asset.js','./asset.css'],{ //this will use the extensions to figu
 In the event that your asset URL doesn't include an extension that can be used to figure out the asset file
 
 ```javascript
-Asset.loadAssetByType('/path/to/some/asset','css',onload,onerror);
+Asset.loadAssetByType('/path/to/some/asset','css',{
+  'class' : 'some-class-name-which-is-applied-to-the-asset',
+  onload : function() { ... },
+  onerror : function() { ... }
+});
 
 //or figure it out by name
 
-Asset.loadAssetByName('/path/to/some/asset.css',onload,onerror);
+Asset.loadAssetByName('/path/to/some/asset.css',{
+  'class' : 'some-class-name-which-is-applied-to-the-asset',
+  onload : function() { ... },
+  onerror : function() { ... }
+});
 ```
 
 ### Direct Assets
 
 ```javascript
 var options = {
+  'class' : '...',
   onload : function() { ... },
   onerror : function() { ... }
 }
