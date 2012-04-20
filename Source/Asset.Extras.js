@@ -156,10 +156,12 @@ Asset._javascript = Asset.javascript;
   },
 
   unload : function(selector) {
-    $$(selector).filter(function(asset) {
+    $$(selector).each(function(asset) {
       var tag = asset.get('tag').toLowerCase();
-      return asset == 'link' || asset == 'script'; 
-    }).destroy();
+      if(tag == 'link' || tag == 'script') {
+        asset.destroy();
+      }
+    });
   },
 
   load : function(assets,options) {
