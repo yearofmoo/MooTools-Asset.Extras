@@ -44,7 +44,8 @@ Asset._javascript = Asset.javascript;
       onSuccess : options.onload,
       onFailure : options.onerror
     };
-    var jsonp = options.jsonp || this.isAssetFromOrigin(path);
+    var jsonp = options.jsonp || !this.isAssetFromOrigin(path);
+    delete options.jsonp;
     new Request[(jsonp ? 'JSONP' : 'JSON')](options).send();
   },
 
