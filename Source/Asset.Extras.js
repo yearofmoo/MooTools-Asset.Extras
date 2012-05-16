@@ -25,9 +25,11 @@ Asset._javascript = Asset.javascript;
     delete options.onerror;
     options.onload = function() {
       var elm = document.id(arguments.callee._id);
-      arguments.callee._onload.call(elm);
-      delete arguments.callee._onload;
-      delete arguments.callee.id;
+      if(elm && arguments.callee._onload) {
+        arguments.callee._onload.call(elm);
+        delete arguments.callee._onload;
+        delete arguments.callee.id;
+      }
     };
     options.onload._onload = onload;
     options.onload._id = id;
